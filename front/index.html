@@ -10,50 +10,66 @@
 <body>
     <div class="container">
 
+        <!-- Time display -->
         <div class="top-time" id="time"></div>
-<!-- Header -->
+
+        <!-- Header -->
         <header>
             <h1>My Digital Diary</h1>
-            <button onclick="window.open('notes.html', '_blank')" style="margin-top:10px; background:#fff7e6; color:#c94f7c; border:1px solid #c94f7c; border-radius:5px; padding:5px 15px; font-family:inherit; font-size:1rem; cursor:pointer;">My Notes</button>
+            <button onclick="window.open('notes.html', '_blank')" 
+                    style="margin-top:10px; background:#fff7e6; color:#c94f7c; border:1px solid #c94f7c; border-radius:5px; padding:5px 15px; font-family:inherit; font-size:1rem; cursor:pointer;">
+                My Notes
+            </button>
         </header>
 
-<!-- Form sec. -->
+        <!-- Diary Form -->
         <form id="diaryForm">
+            <!-- Date input -->
             <div class="diary-Box">
                 <label for="date">Date:</label>
                 <input type="date" id="date">
             </div>
-<!-- Notes section -->
+
+            <!-- Notes section -->
             <div class="diary-Box">
                 <label for="notes">Notes:</label>
                 <textarea id="notes" rows="10" required></textarea>
             </div>
-<!-- Tasks & Gratitude side by side -->
+
+            <!-- Tasks & Gratitude (side by side) -->
             <div class="side-by-side">
                 <!-- Tasks -->
-                 <div class="diary-Box">
+                <div class="diary-Box">
                     <label for="tasks">Tasks:</label>
                     <textarea id="tasks" rows="6" required></textarea>
-                 </div>
-                 <!-- Gratitude -->
-                  <div class="diary-Box">
+                </div>
+
+                <!-- Gratitude -->
+                <div class="diary-Box">
                     <label for="gratitude">Gratitude:</label>
-                    <textarea  id="gratitude" rows="6" required></textarea>
-                  </div>
+                    <textarea id="gratitude" rows="6" required></textarea>
+                </div>
             </div>
-<!-- Submit button -->
+
+            <!-- Save Button -->
             <button type="submit">Save Entry</button>
         </form>
     
-        <!-- Quote footer -->
-         <footer class="quote-Box">
+        <!-- Quote Footer -->
+        <footer class="quote-Box">
             <p id="quote">Loading quote of the day...</p>
-         </footer>
+        </footer>
+
     </div>
 
+    <!-- script file -->
     <script src="script.js"></script>
+
+    
     <script type="module">
       import { saveNote } from '../back/firebase.js';
+
+      // Handle diary form submission
       document.getElementById('diaryForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const note = {
@@ -70,11 +86,16 @@
           alert('Error saving note: ' + result.error);
         }
       });
-      // Fetch a random quote from backend for the index page
+
+      // Fetch a random quote from backend PHP (acts as API)
       fetch('../back/quote.php')
-        .then(r => r.text())
-        .then(q => document.getElementById('quote').textContent = q)
-        .catch(() => document.getElementById('quote').textContent = 'Could not load quote.');
+        .then(response => response.text())
+        .then(quote => {
+          document.getElementById('quote').textContent = quote;
+        })
+        .catch(() => {
+          document.getElementById('quote').textContent = 'Could not load quote.';
+        });
     </script>
 </body>
 </html>
