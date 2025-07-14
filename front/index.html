@@ -14,6 +14,7 @@
 <!-- Header -->
         <header>
             <h1>My Digital Diary</h1>
+            <button onclick="window.open('notes.html', '_blank')" style="margin-top:10px; background:#fff7e6; color:#c94f7c; border:1px solid #c94f7c; border-radius:5px; padding:5px 15px; font-family:inherit; font-size:1rem; cursor:pointer;">My Notes</button>
         </header>
 
 <!-- Form sec. -->
@@ -51,6 +52,29 @@
     </div>
 
     <script src="script.js"></script>
-
+    <script type="module">
+      import { saveNote } from '../back/firebase.js';
+      document.getElementById('diaryForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const note = {
+          date: document.getElementById('date').value,
+          notes: document.getElementById('notes').value,
+          tasks: document.getElementById('tasks').value,
+          gratitude: document.getElementById('gratitude').value
+        };
+        const result = await saveNote(note);
+        if (result.success) {
+          alert('Note saved!');
+          document.getElementById('diaryForm').reset();
+        } else {
+          alert('Error saving note: ' + result.error);
+        }
+      });
+      // Fetch a random quote from backend for the index page
+      fetch('../back/quote.php')
+        .then(r => r.text())
+        .then(q => document.getElementById('quote').textContent = q)
+        .catch(() => document.getElementById('quote').textContent = 'Could not load quote.');
+    </script>
 </body>
 </html>
