@@ -3,9 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>My Digital Diary</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="container">
+
+        <div class="top-time" id="time"></div>
+<!-- Header -->
+        <header>
+            <h1>My Digital Diary</h1>
+        </header>
+
+<!-- Form sec. -->
+        <form id="diaryForm">
+            <div class="diary-Box">
+                <label for="date">Date:</label>
+                <input type="date" id="date">
+            </div>
+<!-- Notes section -->
+            <div class="diary-Box">
+                <label for="notes">Notes:</label>
+                <textarea id="notes" rows="10" required></textarea>
+            </div>
+<!-- Tasks & Gratitude side by side -->
+            <div class="side-by-side">
+                <!-- Tasks -->
+                 <div class="diary-Box">
+                    <label for="tasks">Tasks:</label>
+                    <textarea id="tasks" rows="6" required></textarea>
+                 </div>
+                 <!-- Gratitude -->
+                  <div class="diary-Box">
+                    <label for="gratitude">Gratitude:</label>
+                    <textarea  id="gratitude" rows="6" required></textarea>
+                  </div>
+            </div>
+<!-- Submit button -->
+            <button type="submit">Save Entry</button>
+        </form>
     
+        <!-- Quote footer -->
+         <footer class="quote-Box">
+            <p id="quote">Loading quote of the day...</p>
+         </footer>
+    </div>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
